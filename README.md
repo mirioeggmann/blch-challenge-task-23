@@ -25,6 +25,8 @@ You are allowed to use any language, framework, and platforms. However, the supe
 
 ## Getting Started
 
+TODO: checkout and get inspired of: https://github.com/ethereum-boilerplate/ethereum-boilerplate/tree/main
+
 First, run the development server:
 
 ```bash
