@@ -1,3 +1,5 @@
+# To get started with Next.js see: https://nextjs.org/docs/getting-started
+#
 name: Deploy Next.js site to Pages
 
 on:
@@ -74,7 +76,7 @@ jobs:
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./out
 
