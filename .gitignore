@@ -26,8 +26,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Env files
-.env*
+# TODO grundsätzlich wichtig! Env files
+# .env
 
 # vercel
 .vercel
