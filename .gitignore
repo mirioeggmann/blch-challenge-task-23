@@ -27,7 +27,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # TODO grundsätzlich wichtig! Env files
-# .env
+#.env.local*
+.env.local
 
 # vercel
 .vercel
