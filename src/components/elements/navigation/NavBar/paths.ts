@@ -7,16 +7,16 @@ const NAV_LINKS: ISubNav[] = [
         href: '/marketplace',
     },
     {
+        label: 'Tickets',
+        href: '/balances/nft',
+    },
+    {
         label: 'Transactions',
         href: '/transactions',
     },
     {
         label: 'Transfers',
         href: '/transfers/nft',
-    },
-    {
-        label: 'Balances',
-        href: '/balances/nft',
     },
 ];
 

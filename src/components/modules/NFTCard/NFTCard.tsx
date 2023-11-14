@@ -1,4 +1,4 @@
-import {Box, HStack, Image, SimpleGrid, useColorModeValue} from '@chakra-ui/react';
+import {Box, Button, HStack, Image, SimpleGrid, useColorModeValue} from '@chakra-ui/react';
 import {EvmNft} from '@moralisweb3/common-evm-utils';
 import {Eth} from '@web3uikit/icons';
 import {FC} from 'react';
@@ -45,6 +45,11 @@ const NFTCard: FC<NFTCardParams> = ({nft: {amount, contractType, name, symbol, m
                     </Box>
                 </Box>
             </SimpleGrid>
+            <HStack marginTop={2}>
+                <Button>Validate</Button>
+                <Button>Use</Button>
+                <Button>Resell</Button>
+            </HStack>
         </Box>
     );
 };

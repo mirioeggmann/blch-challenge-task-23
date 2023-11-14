@@ -1,4 +1,4 @@
-import {Box, Button, Heading, Input, useColorModeValue} from "@chakra-ui/react";
+import {Box, Button, Heading, HStack, Input, useColorModeValue} from "@chakra-ui/react";
 
 const Marketplace = () => {
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
@@ -9,8 +9,10 @@ const Marketplace = () => {
                 Marketplace
             </Heading>
             <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
-                <Input placeholder='Address'/>
-                <Button>Buy</Button>
+                <HStack>
+                    <Input placeholder='Address'/>
+                    <Button>Buy</Button>
+                </HStack>
             </Box>
         </>
     );

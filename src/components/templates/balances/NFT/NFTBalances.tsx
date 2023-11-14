@@ -18,7 +18,7 @@ const NFTBalances = () => {
     return (
         <>
             <Heading size="lg" marginBottom={6}>
-                NFT Balances
+                Tickets
             </Heading>
             {nfts?.length ? (
                 <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
