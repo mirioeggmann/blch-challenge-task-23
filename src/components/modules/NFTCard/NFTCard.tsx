@@ -16,16 +16,6 @@ const NFTCard: FC<NFTCardParams> = ({ nft: { amount, contractType, name, symbol,
 
   return (
     <Box maxWidth="315px" bgColor={bgColor} padding={3} borderRadius="xl" borderWidth="1px" borderColor={borderColor}>
-      <Box maxHeight="260px" overflow={'hidden'} borderRadius="xl">
-        <Image
-          src={resolveIPFS((metadata as { image?: string })?.image)}
-          alt={'nft'}
-          minH="260px"
-          minW="260px"
-          boxSize="100%"
-          objectFit="fill"
-        />
-      </Box>
       <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
         {name}
       </Box>
