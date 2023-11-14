@@ -1,4 +1,4 @@
-import { Default } from 'components/layouts/Default';
+import {Default} from 'components/layouts/Default';
 import {Typography} from "@web3uikit/core";
 import Marketplace from "../src/components/templates/marketplace/Marketplace";
 
