@@ -1,4 +1,3 @@
-import {Typography} from "@web3uikit/core";
 import {Box, Button, Heading, Input, useColorModeValue} from "@chakra-ui/react";
 
 const Marketplace = () => {
