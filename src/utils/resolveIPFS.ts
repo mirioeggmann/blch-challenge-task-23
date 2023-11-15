@@ -4,4 +4,3 @@ export const resolveIPFS = (url?: string) => {
   }
   return url.replace('ipfs://', 'https://gateway.ipfs.io/ipfs/');
 };
-F
