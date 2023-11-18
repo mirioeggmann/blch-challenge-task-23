@@ -9,3 +9,7 @@
 - https://sepolia.etherscan.io/token/0x8715f4182b885636b5f34ed5b4b0e491cb26f822?a=1#code
 - https://sepolia.etherscan.io/address/0x8715F4182b885636b5f34Ed5B4b0E491cB26F822#events
 - https://app.unlock-protocol.com/event/test-event-me
+- https://docs.unlock-protocol.com/
+- https://thirdweb.com/unlock-protocol.eth/PublicLock
+- https://docs.unlock-protocol.com/core-protocol/audits
+- https://docs.unlock-protocol.com/core-protocol/smart-contracts-api/
