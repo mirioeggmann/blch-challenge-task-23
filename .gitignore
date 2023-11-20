@@ -29,6 +29,7 @@ yarn-error.log*
 # TODO grundsätzlich wichtig! Env files
 #.env*
 .env
+.env.local
 
 # vercel
 .vercel
