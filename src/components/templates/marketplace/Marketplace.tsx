@@ -1,15 +1,29 @@
 import {Box, Button, Heading, HStack, Input, useColorModeValue} from "@chakra-ui/react";
-import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
-import {FormEvent} from "react";
+import {useSession} from "next-auth/react";
+import {useContractWrite, useNetwork} from "wagmi";
+import {loadAbi} from "../../../utils/ethereumUtils";
+import {parseEther} from "viem";
 
 const Marketplace = () => {
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
 
-    async function buyNft(event: any) {
+    const { data, isLoading, isSuccess, write } = useContractWrite({
+        address: '0xDB789A3d6dbc83Ba7f2d0738dDD8130C3ccd12f3',
+        abi: loadAbi(),
+        functionName: 'buyNFT',
+    });
+
+    function buyNFT(listingId: number) {
+        write({
+            args: [listingId],
+            value: BigInt(1)
+        });
+    }
+
+    async function onSubmit(event: any) {
         event.preventDefault();
-        console.log(event.target[0].value);
-        console.log(process.env.EXCHANGE_ADDRESS);
+        const listingId = event.target[0].value;
+        buyNFT(listingId);
     }
 
     return (
@@ -18,13 +32,12 @@ const Marketplace = () => {
                 Marketplace
             </Heading>
             <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
-                <form onSubmit={buyNft}>
+                <form onSubmit={onSubmit}>
                     <HStack>
-                        <label htmlFor={"address"}>Address</label>
+                        <label htmlFor={"address"}>Listing ID: </label>
                         <Input
                             id={"address"}
                             type={"text"}
-                            placeholder='Address'
                             name={"address"}
                             required
                         />
