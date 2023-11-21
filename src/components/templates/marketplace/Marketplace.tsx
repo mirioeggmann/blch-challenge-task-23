@@ -1,14 +1,24 @@
-import {Box, Button, Heading, HStack, Input, useColorModeValue} from "@chakra-ui/react";
+import {Box, Button, Grid, Heading, HStack, Input, useColorModeValue} from "@chakra-ui/react";
 import {useSession} from "next-auth/react";
 import {useContractWrite, useNetwork} from "wagmi";
 import {loadAbi} from "../../../utils/ethereumUtils";
 import {parseEther} from "viem";
+import {useEvmWalletNFTs} from "@moralisweb3/next";
+import {NFTCard} from "../../modules";
 
 const Marketplace = () => {
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
 
+    const contractAddress = '0xDB789A3d6dbc83Ba7f2d0738dDD8130C3ccd12f3';
+
+    const {chain} = useNetwork();
+    const {data: nfts} = useEvmWalletNFTs({
+        address: contractAddress,
+        chain: chain?.id,
+    });
+
     const { data, isLoading, isSuccess, write } = useContractWrite({
-        address: '0xDB789A3d6dbc83Ba7f2d0738dDD8130C3ccd12f3',
+        address: contractAddress,
         abi: loadAbi(),
         functionName: 'buyNFT',
     });
@@ -45,6 +55,15 @@ const Marketplace = () => {
                     </HStack>
                 </form>
             </Box>
+            {nfts?.length ? (
+                <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
+                    {nfts.map((nft, key) => (
+                        <NFTCard nft={nft} key={key}/>
+                    ))}
+                </Grid>
+            ) : (
+                <Box>Looks the Exchange does not have any NFTs</Box>
+            )}
         </>
     );
 };
