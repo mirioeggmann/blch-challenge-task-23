@@ -13,3 +13,9 @@
 - https://thirdweb.com/unlock-protocol.eth/PublicLock
 - https://docs.unlock-protocol.com/core-protocol/audits
 - https://docs.unlock-protocol.com/core-protocol/smart-contracts-api/
+- https://hackernoon.com/building-an-nft-exchange-contract-with-solidity-a-step-by-step-guide
+- https://dev.to/mbogan/build-a-web3-ticketing-system-with-nfts-and-disrupt-ticketmaster-4g90
+- https://testnets.opensea.io/
+- https://wagmi.sh/
+- https://sepolia.etherscan.io/
+- https://remix.ethereum.org/
