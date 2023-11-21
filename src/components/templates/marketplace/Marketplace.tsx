@@ -9,16 +9,16 @@ import {NFTCard} from "../../modules";
 const Marketplace = () => {
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
 
-    const contractAddress = '0xDB789A3d6dbc83Ba7f2d0738dDD8130C3ccd12f3';
+    const exchangeContractAddress = '0x31026ebe2841825cb0639aa2e138f770d3b1a4f9';
 
     const {chain} = useNetwork();
     const {data: nfts} = useEvmWalletNFTs({
-        address: contractAddress,
+        address: exchangeContractAddress,
         chain: chain?.id,
     });
 
     const { data, isLoading, isSuccess, write } = useContractWrite({
-        address: contractAddress,
+        address: exchangeContractAddress,
         abi: loadAbi(),
         functionName: 'buyNFT',
     });
