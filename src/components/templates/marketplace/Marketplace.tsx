@@ -1,14 +1,9 @@
-import {Box, Button, Grid, Heading, HStack, Input, useColorModeValue} from "@chakra-ui/react";
-import {useSession} from "next-auth/react";
-import {useContractWrite, useNetwork} from "wagmi";
-import {loadAbi} from "../../../utils/ethereumUtils";
-import {parseEther} from "viem";
+import {Box, Grid, Heading} from "@chakra-ui/react";
+import {useNetwork} from "wagmi";
 import {useEvmWalletNFTs} from "@moralisweb3/next";
 import {NFTCard} from "../../modules";
 
 const Marketplace = () => {
-    const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
-
     const exchangeContractAddress = '0x31026ebe2841825cb0639aa2e138f770d3b1a4f9';
 
     const {chain} = useNetwork();
@@ -17,48 +12,15 @@ const Marketplace = () => {
         chain: chain?.id,
     });
 
-    const { data, isLoading, isSuccess, write } = useContractWrite({
-        address: exchangeContractAddress,
-        abi: loadAbi(),
-        functionName: 'buyNFT',
-    });
-
-    function buyNFT(listingId: number) {
-        write({
-            args: [listingId],
-            value: BigInt(1)
-        });
-    }
-
-    async function onSubmit(event: any) {
-        event.preventDefault();
-        const listingId = event.target[0].value;
-        buyNFT(listingId);
-    }
-
     return (
         <>
             <Heading size="lg" marginBottom={6}>
                 Marketplace
             </Heading>
-            <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
-                <form onSubmit={onSubmit}>
-                    <HStack>
-                        <label htmlFor={"address"}>Listing ID: </label>
-                        <Input
-                            id={"address"}
-                            type={"text"}
-                            name={"address"}
-                            required
-                        />
-                        <Button type={"submit"}>Buy</Button>
-                    </HStack>
-                </form>
-            </Box>
             {nfts?.length ? (
                 <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
                     {nfts.map((nft, key) => (
-                        <NFTCard nft={nft} key={key}/>
+                        <NFTCard nft={nft} key={key} isSelling={true}/>
                     ))}
                 </Grid>
             ) : (

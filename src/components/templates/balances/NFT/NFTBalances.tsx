@@ -23,7 +23,7 @@ const NFTBalances = () => {
             {nfts?.length ? (
                 <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
                     {nfts.map((nft, key) => (
-                        <NFTCard nft={nft} key={key}/>
+                        <NFTCard nft={nft} key={key} isSelling={false}/>
                     ))}
                 </Grid>
             ) : (
