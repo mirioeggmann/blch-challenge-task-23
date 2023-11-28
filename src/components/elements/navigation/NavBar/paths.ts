@@ -11,6 +11,10 @@ const NAV_LINKS: ISubNav[] = [
         href: '/balances/nft',
     },
     {
+        label: 'Create Event',
+        href: '/eventCreation',
+    },
+    {
         label: 'Transactions',
         href: '/transactions',
     },
