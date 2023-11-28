@@ -1,11 +1,10 @@
 import {Box, Grid, Heading} from '@chakra-ui/react';
-import {useEvmNFTMetadata} from '@moralisweb3/next';
 import {useContractRead} from 'wagmi';
 import {loadAbi} from '../../../utils/ethereumUtils';
 import MarketplaceElement from "./MarketplaceElement";
 
 const Marketplace = () => {
-    const exchangeContractAddress = '0x654406b8a47Ae366e35D100695a95D9aa26b3eC4';
+    const exchangeContractAddress = '0x7f13f94c59893ea456a39b5299f74aa0b307695e';
 
     const { data: listings } = useContractRead({
         address: exchangeContractAddress,
