@@ -1,6 +1,6 @@
 import {useEvmNFTMetadata} from '@moralisweb3/next';
 import {NFTCard} from '../../modules';
-import {EvmChain, EvmNft} from '@moralisweb3/common-evm-utils';
+import {EvmNft} from '@moralisweb3/common-evm-utils';
 import {useEffect, useState} from "react";
 
 export interface TicketInfo {
@@ -22,8 +22,6 @@ const MarketplaceElement = (props: TicketInfo) => {
             tokenId: BigInt(props.tokenId).toString()
         });
 
-        console.log(nft);
-
         if (nft !== undefined) {
             setNft(nft);
         }
@@ -37,7 +35,7 @@ const MarketplaceElement = (props: TicketInfo) => {
         <>
             {
                 nft !== undefined
-                    ? <NFTCard nft={nft} key={props.key} isSelling={true}/>
+                    ? <NFTCard nft={nft} key={props.key} buyerPrice={BigInt(props.price)}/>
                     : <></>
             }
         </>

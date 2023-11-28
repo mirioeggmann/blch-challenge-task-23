@@ -13,8 +13,6 @@ const Marketplace = () => {
         functionName: 'getAllListings',
     });
 
-    console.log(listings);
-
     return (
         <>
             <Heading size="lg" marginBottom={6}>
