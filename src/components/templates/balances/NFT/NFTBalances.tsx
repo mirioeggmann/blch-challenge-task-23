@@ -4,6 +4,7 @@ import {NFTCard} from 'components/modules';
 import {useSession} from 'next-auth/react';
 import {useEffect} from 'react';
 import {useNetwork} from 'wagmi';
+import NFTCardSell from "../../../modules/NFTCard/NFTCardSell";
 
 const NFTBalances = () => {
     const {data} = useSession();
@@ -23,7 +24,7 @@ const NFTBalances = () => {
             {nfts?.length ? (
                 <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
                     {nfts.map((nft, key) => (
-                        <NFTCard nft={nft} key={key} isSelling={false}/>
+                        <NFTCardSell nft={nft} key={key} />
                     ))}
                 </Grid>
             ) : (

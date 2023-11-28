@@ -8,10 +8,10 @@ import {loadAbi} from '../../../utils/ethereumUtils';
 export interface NFTCardParams {
     key: number;
     nft: EvmNft;
-    isSelling: boolean;
+    buyerPrice: BigInt;
 }
 
-const NFTCard: FC<NFTCardParams> = ({nft, isSelling}) => {
+const NFTCardBuy: FC<NFTCardParams> = ({nft, buyerPrice}) => {
     const bgColor = useColorModeValue('none', 'gray.700');
     const borderColor = useColorModeValue('gray.200', 'gray.700');
     const descBgColor = useColorModeValue('gray.100', 'gray.600');
@@ -27,28 +27,12 @@ const NFTCard: FC<NFTCardParams> = ({nft, isSelling}) => {
     function buyNFT(listingId: number) {
         buyNFTWrite({
             args: [listingId],
-            value: BigInt(1),
+            value: buyerPrice as bigint,
         });
     }
 
     function buy(nft: EvmNft): void {
         buyNFT(nft.tokenId as number);
-    }
-
-    const {write: createListingWrite} = useContractWrite({
-        address: exchangeContractAddress,
-        abi: loadAbi(),
-        functionName: 'createListing',
-    });
-
-    function createListing(nft: EvmNft): void {
-        createListingExec(nft.tokenAddress['_value'] as string, nft.tokenId as number, 1);
-    }
-
-    function createListingExec(nftContract: string, tokenId: number, price: number): void {
-        createListingWrite({
-            args: [nftContract, tokenId, price],
-        });
     }
 
     return (
@@ -81,20 +65,20 @@ const NFTCard: FC<NFTCardParams> = ({nft, isSelling}) => {
                         {nft.amount}
                     </Box>
                 </Box>
+                <Box>
+                    <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
+                        Price
+                    </Box>
+                    <Box as="h4" noOfLines={1} fontSize="sm">
+                        {buyerPrice.toString()} Wei
+                    </Box>
+                </Box>
             </SimpleGrid>
-            {isSelling ? (
-                <HStack marginTop={2}>
-                    <Button onClick={() => buy(nft)}>Buy</Button>
-                </HStack>
-            ) : (
-                <HStack marginTop={2}>
-                    <Button>Validate</Button>
-                    <Button>Use</Button>
-                    <Button onClick={() => createListing(nft)}>Resell</Button>
-                </HStack>
-            )}
+            <HStack marginTop={2}>
+                <Button onClick={() => buy(nft)}>Buy</Button>
+            </HStack>
         </Box>
     );
 };
 
-export default NFTCard;
+export default NFTCardBuy;
