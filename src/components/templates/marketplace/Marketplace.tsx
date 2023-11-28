@@ -1,10 +1,12 @@
 import {Box, Grid, Heading} from '@chakra-ui/react';
-import {useContractRead} from 'wagmi';
+import {useContractRead, useNetwork} from 'wagmi';
 import {loadAbi} from '../../../utils/ethereumUtils';
 import MarketplaceElement from "./MarketplaceElement";
+import NftTransferTable from "../transfers/NFT/NftTransferTable";
 
 const Marketplace = () => {
     const exchangeContractAddress = '0x7f13f94c59893ea456a39b5299f74aa0b307695e';
+    const {chain} = useNetwork();
 
     const { data: listings } = useContractRead({
         address: exchangeContractAddress,
@@ -15,6 +17,11 @@ const Marketplace = () => {
     return (
         <>
             <Heading size="lg" marginBottom={6}>
+                Marketplace History
+            </Heading>
+            <NftTransferTable address={exchangeContractAddress} chain={chain?.id}></NftTransferTable>
+
+            <Heading size="lg" marginTop={6} marginBottom={6}>
                 Marketplace
             </Heading>
             {listings?.length ? (
@@ -24,7 +31,7 @@ const Marketplace = () => {
                     ))}
                 </Grid>
             ) : (
-                <Box>Looks the Exchange does not have any NFTs</Box>
+                <Box>Looks like the Exchange does not have any NFTs</Box>
             )}
         </>
     );
