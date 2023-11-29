@@ -1,15 +1,14 @@
-import {Box, Grid, Heading} from '@chakra-ui/react';
-import {useEvmWalletNFTs} from '@moralisweb3/next';
-import {NFTCard} from 'components/modules';
-import {useSession} from 'next-auth/react';
-import {useEffect} from 'react';
-import {useNetwork} from 'wagmi';
-import NFTCardSell from "../../../modules/NFTCard/NFTCardSell";
+import { Box, Grid, Heading } from '@chakra-ui/react';
+import { useEvmWalletNFTs } from '@moralisweb3/next';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useNetwork } from 'wagmi';
+import NFTCardSell from '../../../modules/NFTCard/NFTCardSell';
 
 const NFTBalances = () => {
-    const {data} = useSession();
-    const {chain} = useNetwork();
-    const {data: nfts} = useEvmWalletNFTs({
+    const { data } = useSession();
+    const { chain } = useNetwork();
+    const { data: nfts } = useEvmWalletNFTs({
         address: data?.user?.address,
         chain: chain?.id,
     });

@@ -1,1 +1,1 @@
-export { default as NFTCard } from './NFTCardBuy';
+export { default as NFTCardBuy } from './NFTCardBuy';
