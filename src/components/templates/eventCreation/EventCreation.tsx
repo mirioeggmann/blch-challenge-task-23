@@ -1,7 +1,16 @@
-import {Box, Button, Heading, HStack, Input} from "@chakra-ui/react";
-
+import { Box, Button, Heading, HStack, Input } from '@chakra-ui/react';
+import { useNetwork } from 'wagmi';
 
 const EventCreation = () => {
+    // use contract create müsste es haben
+    const { chain } = useNetwork();
+
+    //deployContract(loadAbi(), useAccount());
+
+    //var walletClient = useWalletClient(
+    //    chain: 11155111,
+    //);
+    //walletClient.
 
     async function onSubmit(event: any) {
         event.preventDefault();
@@ -10,8 +19,6 @@ const EventCreation = () => {
         const abbr = event.target[1].value as string;
         const price = event.target[2].value;
         const amount = event.target[3].value;
-
-        
     }
 
     return (
@@ -22,37 +29,19 @@ const EventCreation = () => {
             <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
                 <form onSubmit={onSubmit}>
                     <HStack>
-                        <label htmlFor={"name"}>Name</label>
-                        <Input
-                            required
-                            type={"text"}
-                            id={"name"}
-                            placeholder={"Name"}
-                        />
-                        <label htmlFor={"abbr"}>Abbreviation</label>
-                        <Input
-                            required
-                            type={"text"}
-                            id={"abbr"}
-                            placeholder={"Abbreviation"}
-                        />
-                        <label htmlFor={"price"}>Price</label>
-                        <Input
-                            required
-                            type={"number"}
-                            id={"price"}
-                            placeholder={"Price"}
-                        />
-                        <label htmlFor={"amount"}>Amount</label>
-                        <Input
-                            required
-                            type={"number"}
-                            id={"amount"}
-                            placeholder={"Amount"}
-                        />
+                        <label htmlFor={'name'}>Name</label>
+                        <Input required type={'text'} id={'name'} placeholder={'Name'} />
+                        <label htmlFor={'abbr'}>Abbreviation</label>
+                        <Input required type={'text'} id={'abbr'} placeholder={'Abbreviation'} />
+                        <label htmlFor={'price'}>Price</label>
+                        <Input required type={'number'} id={'price'} placeholder={'Price'} />
+                        <label htmlFor={'amount'}>Amount</label>
+                        <Input required type={'number'} id={'amount'} placeholder={'Amount'} />
                     </HStack>
                     <HStack marginTop={2}>
-                        <Button type={"submit"}>Create</Button>
+                        <Button type={'submit'}>Create</Button>
+                        {/*TODO auslagern in sinnvolle view*/}
+                        <Button type={'submit'}>List Event</Button>
                     </HStack>
                 </form>
             </Box>
