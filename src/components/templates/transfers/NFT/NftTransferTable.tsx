@@ -11,12 +11,12 @@ import {
     Box,
     useColorModeValue,
 } from '@chakra-ui/react';
-import {useEvmWalletNFTTransfers} from '@moralisweb3/next';
-import {useSession} from 'next-auth/react';
-import {useEffect} from 'react';
-import {getEllipsisTxt} from 'utils/format';
-import {useNetwork} from 'wagmi';
-import {EvmChainish} from "@moralisweb3/common-evm-utils";
+import { useEvmWalletNFTTransfers } from '@moralisweb3/next';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { getEllipsisTxt } from 'utils/format';
+import { useNetwork } from 'wagmi';
+import { EvmChainish } from '@moralisweb3/common-evm-utils';
 
 export interface NftTransferTableParams {
     address: string;
@@ -26,7 +26,7 @@ export interface NftTransferTableParams {
 const NftTransferTable = (props: NftTransferTableParams) => {
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
 
-    const {data: transfers} = useEvmWalletNFTTransfers({
+    const { data: transfers } = useEvmWalletNFTTransfers({
         address: props.address,
         chain: props.chain,
     });
@@ -53,9 +53,9 @@ const NftTransferTable = (props: NftTransferTableParams) => {
                             </Thead>
                             <Tbody>
                                 {transfers?.map((transfer, key) => (
-                                    <Tr key={key} _hover={{bgColor: hoverTrColor}} cursor="pointer">
+                                    <Tr key={key} _hover={{ bgColor: hoverTrColor }} cursor="pointer">
                                         <Td>{transfer?.tokenId}</Td>
-                                        <Td>{transfer.value?.ether} Ether</Td>
+                                        <Td>{transfer.value?.wei} Wei</Td>
                                         <Td>{transfer.amount}</Td>
                                         <Td>{new Date(transfer.blockTimestamp).toLocaleDateString()}</Td>
                                         <Td>{transfer?.tokenAddress.checksum}</Td>
