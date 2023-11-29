@@ -1,17 +1,10 @@
 import { Box, Button, Heading, HStack, Input } from '@chakra-ui/react';
-import { useNetwork } from 'wagmi';
+import { deployContract } from 'viem/contract';
+import { createWalletClient, custom, http } from 'viem';
+import { sepolia } from '@wagmi/core/chains';
+import { loadAbiNftContract, loadBytecodeNftContract } from '../../../utils/ethereumUtils';
 
 const EventCreation = () => {
-    // use contract create müsste es haben
-    const { chain } = useNetwork();
-
-    //deployContract(loadAbi(), useAccount());
-
-    //var walletClient = useWalletClient(
-    //    chain: 11155111,
-    //);
-    //walletClient.
-
     async function onSubmit(event: any) {
         event.preventDefault();
 
@@ -19,6 +12,27 @@ const EventCreation = () => {
         const abbr = event.target[1].value as string;
         const price = event.target[2].value;
         const amount = event.target[3].value;
+
+        // TODO call 1: creation of contract, cleanup to insert form stuff etc.
+
+        const client = createWalletClient({
+            chain: sepolia,
+            // @ts-ignore
+            transport: custom(window.ethereum),
+        });
+
+        const [address] = await client.getAddresses();
+
+        const result = await deployContract(client, {
+            abi: loadAbiNftContract(),
+            bytecode: `0x${loadBytecodeNftContract()}`,
+            args: [address],
+            account: address,
+        });
+
+        console.log(result); // contract wird erfolgreich erstellt, achtung return wert ist nicht contract addresse sondern tx adresse, welche aufzeigt von wem der contract erstellt wurde
+
+        // TODO call 2: vermutlich in neuem form für list event contractwrite (analog zu create listing - aber mit bulk listing funktion) -> auf exchange contract
     }
 
     return (
