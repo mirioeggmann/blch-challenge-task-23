@@ -26,15 +26,19 @@ const Marketplace = () => {
             </Heading>
             {listings?.length ? (
                 <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
-                    {listings.slice(1).map((listing, key) => (
-                        <MarketplaceElement
-                            key={key}
-                            tokenId={listing.tokenId}
-                            id={listing.id}
-                            nftContractAdress={listing.nftContract}
-                            price={listing.price}
-                        />
-                    ))}
+                    {listings.slice(1).map((listing, key) => {
+                        if (!listing.isSold) {
+                            return (
+                                <MarketplaceElement
+                                    key={key}
+                                    tokenId={listing.tokenId}
+                                    id={listing.id}
+                                    nftContractAdress={listing.nftContract}
+                                    price={listing.price}
+                                />
+                            );
+                        }
+                    })}
                 </Grid>
             ) : (
                 <Box>Looks like the Exchange does not have any NFTs</Box>
