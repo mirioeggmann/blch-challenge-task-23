@@ -1,50 +1,38 @@
 {
-  "name": "blch-challenge-task-23",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "format": "prettier . \"**/*.+(js|ts|json)\" --write --ignore-path .gitignore",
-    "format:check": "prettier \"**/*.+(js|ts|json)\" --check --ignore-path .gitignore",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test:e2e": "start-server-and-test dev http://localhost:3000 test:cypress",
-    "test:cypress": "cypress run --browser chrome --headless"
-  },
-  "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@moralisweb3/next": "^2.23.2",
-    "@wagmi/core": "^1.4.7",
-    "@web3uikit/core": "^1.1.5",
-    "@web3uikit/icons": "^1.1.2",
-    "eslint-config-next": "^14.0.3",
-    "ethers": "^6.9.0",
-    "framer-motion": "^10.16.5",
-    "moralis": "^2.23.2",
-    "next": "^14.0.3",
-    "next-auth": "^4.24.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "viem": "^1.19.9",
-    "wagmi": "^1.4.7"
-  },
-  "devDependencies": {
-    "@types/node": "20.9.2",
-    "@types/react": "18.2.38",
-    "@types/react-dom": "18.2.15",
-    "@typescript-eslint/parser": "^6.13.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "cypress": "^13.5.1",
-    "eslint": "8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-cypress": "^2.15.1",
-    "eslint-plugin-etc": "^2.0.3",
-    "prettier": "3.1.0",
-    "start-server-and-test": "^2.0.3",
-    "typescript": "5.3.2"
-  }
+    "name": "blch-challenge-task-23",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "format": "prettier . \"**/*.+(js|ts|json)\" --write --ignore-path .gitignore",
+        "format:check": "prettier \"**/*.+(js|ts|json)\" --check --ignore-path .gitignore",
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@chakra-ui/icons": "^2.1.1",
+        "@chakra-ui/react": "^2.8.2",
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@moralisweb3/next": "^2.23.2",
+        "@wagmi/core": "^1.4.7",
+        "@web3uikit/core": "^1.1.5",
+        "@web3uikit/icons": "^1.1.2",
+        "eslint-config-next": "^14.0.3",
+        "framer-motion": "^10.16.5",
+        "next": "^14.0.3",
+        "next-auth": "^4.24.5",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "viem": "^1.19.9",
+        "wagmi": "^1.4.7"
+    },
+    "devDependencies": {
+        "@types/react": "18.2.38",
+        "eslint": "8.54.0",
+        "eslint-config-prettier": "^9.0.0",
+        "prettier": "3.1.0",
+        "typescript": "5.3.2"
+    }
 }
