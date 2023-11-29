@@ -1,24 +1,25 @@
-import {Box, Button, HStack, SimpleGrid, useColorModeValue} from '@chakra-ui/react';
-import {EvmNft} from '@moralisweb3/common-evm-utils';
-import {Eth} from '@web3uikit/icons';
-import {FC} from 'react';
-import {useContractWrite} from 'wagmi';
-import {loadAbi} from '../../../utils/ethereumUtils';
+import { Box, Button, HStack, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
+import { EvmNft } from '@moralisweb3/common-evm-utils';
+import { Eth } from '@web3uikit/icons';
+import { FC } from 'react';
+import { useContractWrite } from 'wagmi';
+import { loadAbi } from '../../../utils/ethereumUtils';
 
 export interface NFTCardParams {
     key: number;
     nft: EvmNft;
     buyerPrice: BigInt;
+    id: number;
 }
 
-const NFTCardBuy: FC<NFTCardParams> = ({nft, buyerPrice}) => {
+const NFTCardBuy: FC<NFTCardParams> = ({ nft, buyerPrice, id }) => {
     const bgColor = useColorModeValue('none', 'gray.700');
     const borderColor = useColorModeValue('gray.200', 'gray.700');
     const descBgColor = useColorModeValue('gray.100', 'gray.600');
 
     const exchangeContractAddress = '0x7f13f94c59893ea456a39b5299f74aa0b307695e';
 
-    const {write: buyNFTWrite} = useContractWrite({
+    const { write: buyNFTWrite } = useContractWrite({
         address: exchangeContractAddress,
         abi: loadAbi(),
         functionName: 'buyNFT',
@@ -32,12 +33,21 @@ const NFTCardBuy: FC<NFTCardParams> = ({nft, buyerPrice}) => {
     }
 
     function buy(nft: EvmNft): void {
-        buyNFT(nft.tokenId as number);
+        console.log(nft);
+        console.log(id);
+        // TODO change this to listingId (from exchange contract not tokenId from nft contract)
+        buyNFT(id as number);
     }
 
     return (
-        <Box maxWidth="315px" bgColor={bgColor} padding={3} borderRadius="xl" borderWidth="1px"
-             borderColor={borderColor}>
+        <Box
+            maxWidth="315px"
+            bgColor={bgColor}
+            padding={3}
+            borderRadius="xl"
+            borderWidth="1px"
+            borderColor={borderColor}
+        >
             <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
                 {nft.name}
             </Box>
@@ -46,7 +56,7 @@ const NFTCardBuy: FC<NFTCardParams> = ({nft, buyerPrice}) => {
                     {nft.contractType}
                 </Box>
 
-                <Eth fontSize="20px"/>
+                <Eth fontSize="20px" />
             </HStack>
             <SimpleGrid columns={2} spacing={4} bgColor={descBgColor} padding={2.5} borderRadius="xl" marginTop={2}>
                 <Box>
@@ -71,6 +81,14 @@ const NFTCardBuy: FC<NFTCardParams> = ({nft, buyerPrice}) => {
                     </Box>
                     <Box as="h4" noOfLines={1} fontSize="sm">
                         {buyerPrice.toString()} Wei
+                    </Box>
+                </Box>
+                <Box>
+                    <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
+                        ExchangeListingId
+                    </Box>
+                    <Box as="h4" noOfLines={1} fontSize="sm">
+                        {id.toString()}
                     </Box>
                 </Box>
             </SimpleGrid>
