@@ -30,7 +30,7 @@ const MarketplaceElement = (props: TicketInfo) => {
 
     useEffect(() => {
         loadTicket();
-    }, []);
+    });
 
     return (
         <>
