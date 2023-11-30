@@ -17,7 +17,7 @@ const NFTCardBuy: FC<NFTCardParams> = ({ nft, buyerPrice, id }) => {
     const borderColor = useColorModeValue('gray.200', 'gray.700');
     const descBgColor = useColorModeValue('gray.100', 'gray.600');
 
-    const exchangeContractAddress = '0x726A8bBFeE820aa8cbDa08dbe6ba5d06A3A3eAA9';
+    const exchangeContractAddress = '0x3288b0e0194b2b74571a62a344c67b7d62637f7b';
 
     const { write: buyNFTWrite } = useContractWrite({
         address: exchangeContractAddress,

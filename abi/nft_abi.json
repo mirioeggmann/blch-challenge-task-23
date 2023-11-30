@@ -2,11 +2,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "initialOwner",
-                "type": "address"
-            },
-            {
                 "internalType": "uint256",
                 "name": "maxSupply",
                 "type": "uint256"
@@ -20,6 +15,11 @@
                 "internalType": "string",
                 "name": "eventShortName",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "exchange",
+                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",

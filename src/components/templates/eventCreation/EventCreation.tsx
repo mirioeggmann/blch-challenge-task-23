@@ -1,17 +1,23 @@
 import { Box, Button, Heading, HStack, Input } from '@chakra-ui/react';
 import { deployContract } from 'viem/contract';
-import { createWalletClient, custom, http } from 'viem';
+import { createWalletClient, custom, getContractAddress } from 'viem';
 import { sepolia } from '@wagmi/core/chains';
 import { loadAbi, loadAbiNftContract, loadBytecodeNftContract } from '../../../utils/ethereumUtils';
 import { useContractWrite } from 'wagmi';
+import { getTransactionCount } from 'viem/actions';
 
 const EventCreation = () => {
-    // TODO muss noch auf range gewechselt werden und nicht single createListing
-    const exchangeContractAddress = '0x726A8bBFeE820aa8cbDa08dbe6ba5d06A3A3eAA9';
+    function delay(ms: number) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    const exchangeContractAddress = '0x3288b0e0194b2b74571a62a344c67b7d62637f7b';
+
     const { write: createBulkListingWrite } = useContractWrite({
+        // @ts-ignore
         address: exchangeContractAddress,
         abi: loadAbi(),
-        functionName: 'createListing',
+        functionName: 'createMultipleListing',
     });
 
     async function onSubmit(event: any) {
@@ -30,19 +36,31 @@ const EventCreation = () => {
 
         const [address] = await client.getAddresses();
 
-        const result = await deployContract(client, {
+        const contractCreationTransactionId = await deployContract(client, {
             abi: loadAbiNftContract(),
             bytecode: `0x${loadBytecodeNftContract()}`,
-            args: [address, amount, name, abbr],
+            args: [amount, name, abbr, exchangeContractAddress],
             account: address,
         });
 
-        console.log(result); // contract wird erfolgreich erstellt, achtung return wert ist nicht contract addresse sondern tx adresse, welche aufzeigt von wem der contract erstellt wurde
+        console.log(contractCreationTransactionId); // contract wird erfolgreich erstellt, achtung return wert ist nicht contract addresse sondern tx adresse, welche aufzeigt von wem der contract erstellt wurde
 
-        // TODO hier noch dynamisch die neue contract adresse hinterlegen, die vorhin neu erzeut wurde
-        // TODO auslagern in eigene funktion + (form?)
+        const nonce = await getTransactionCount(client, {
+            address: address,
+        });
+
+        const contractAddress = getContractAddress({
+            from: address,
+            nonce: BigInt(nonce),
+        });
+
+        console.log(contractAddress);
+
+        // TODO split in two actions with 2 buttons Create event / List event
+        await delay(12000);
+
         createBulkListingWrite({
-            args: ['0x4464Da745f26CD714fA9E4094b9CB8ED9F453612', amount, price],
+            args: [contractAddress, price, 0, amount - 1],
         });
     }
 
