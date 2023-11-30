@@ -15,7 +15,7 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
     const borderColor = useColorModeValue('gray.200', 'gray.700');
     const descBgColor = useColorModeValue('gray.100', 'gray.600');
 
-    const exchangeContractAddress = '0x3288b0e0194b2b74571a62a344c67b7d62637f7b';
+    const exchangeContractAddress = process.env.NEXT_PUBLIC_EXCHANGE_ADDRESS as `0x{string}`;
 
     const { write: createListingWrite } = useContractWrite({
         address: exchangeContractAddress,
