@@ -14,6 +14,7 @@ export interface TicketInfo {
 const MarketplaceElement = (props: TicketInfo) => {
     const [nft, setNft] = useState<EvmNft>();
 
+    // TODO hier muss irgendwie geprüft werden, damit es im network nicht ein loop von calls gibt
     const { fetch: fetchNftMetadata } = useEvmNFTMetadata();
 
     async function loadTicket() {
@@ -30,7 +31,7 @@ const MarketplaceElement = (props: TicketInfo) => {
 
     useEffect(() => {
         loadTicket();
-    });
+    }, [loadTicket, props.nftContractAdress, props.tokenId]);
 
     return (
         <>
