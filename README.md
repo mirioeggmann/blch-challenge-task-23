@@ -16,6 +16,8 @@ Then, run the development server:
 npm run dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 ## Description of the task
 This semester's challenge task (CT) is the design and implementation of a blockchain-based solution to a specific problem that you have identified in your own life or community. 
 Ideally, the application is a decentralized application (DApp).
@@ -47,10 +49,8 @@ The solution may use existing libraries and code, but those must open software s
 You are allowed to use any language, framework, and platforms. 
 However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeScript, Ethereum, Bitcoin, Linux.
 
-## Possible further improvements in a next step after this challenge task
-- Add a feature to redeem tickets i a nice fashion (with QR code scanning or similar)
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Possible further product improvements in a next step after this challenge task
+- Add a feature to redeem tickets in a nice fashion (with QR code scanning or similar)
 
 ## Credits
 
