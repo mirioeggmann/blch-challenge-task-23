@@ -1,6 +1,6 @@
 # Challenge Task HS 2023
 ## Repo setup
-- https://github.com/mirioeggmann/blch-challenge-task-23 (main repo with the frontend and the documentation in `docs/`)
+- https://github.com/mirioeggmann/blch-challenge-task-23 (main repo with the frontend and the documentation/presentation in `docs/`)
 - https://github.com/mirioeggmann/blch-challenge-task-23-contract (seperate for the contract, to work well with remix localhost integration/hardhat)
 
 ## Our solution
