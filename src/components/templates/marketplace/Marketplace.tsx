@@ -5,7 +5,7 @@ import MarketplaceElement from './MarketplaceElement';
 import NftTransferTable from '../transfers/NFT/NftTransferTable';
 
 const Marketplace = () => {
-    const exchangeContractAddress = '0x726A8bBFeE820aa8cbDa08dbe6ba5d06A3A3eAA9';
+    const exchangeContractAddress = '0x3288b0e0194b2b74571a62a344c67b7d62637f7b';
     const { chain } = useNetwork();
 
     const { data: listings } = useContractRead({
