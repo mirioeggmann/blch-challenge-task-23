@@ -7,7 +7,7 @@ import {useSession} from "next-auth/react";
 import {Typography} from "@web3uikit/core";
 
 const Marketplace = () => {
-    const exchangeContractAddress = '0x3288b0e0194b2b74571a62a344c67b7d62637f7b';
+    const exchangeContractAddress = process.env.NEXT_PUBLIC_EXCHANGE_ADDRESS as `0x{string}`;
     const { chain } = useNetwork();
     const session = useSession();
 
