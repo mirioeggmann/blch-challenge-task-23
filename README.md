@@ -11,7 +11,18 @@ We use a react (next) frontend and a two different smart contracts (one for the 
 
 Either use the deployed version on https://blch-challenge-task-23.vercel.app/ or run it locally:
 
-Apply the [Quick Start](https://github.com/ethereum-boilerplate/ethereum-boilerplate?tab=readme-ov-file#-quick-start) steps (you can use `npm install` instead of yarn)
+First, clone the repo and then create a `.env.local` file in the root directory of the project with the following content:
+```bash
+MORALIS_API_KEY=xxxx
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=7197b3e8dbee5ea6274cab37245eec212
+EXCHANGE_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+Then install the dependencies:
+```bash
+npm install
+```
 
 Then, run the development server:
 ```bash
