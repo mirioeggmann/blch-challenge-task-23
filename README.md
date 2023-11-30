@@ -7,6 +7,15 @@
 A system to mint, buy and resell event tickets making use of the Ethereum blockchain.
 We use a react (next) frontend and a two different smart contracts (one for the tickets and one for the marketplace).
 
+## Getting Started
+
+Apply the [Quick Start](https://github.com/ethereum-boilerplate/ethereum-boilerplate?tab=readme-ov-file#-quick-start) steps (you can use `npm install` instead of yarn)
+
+Then, run the development server:
+```bash
+npm run dev
+```
+
 ## Description of the task
 This semester's challenge task (CT) is the design and implementation of a blockchain-based solution to a specific problem that you have identified in your own life or community. 
 Ideally, the application is a decentralized application (DApp).
@@ -40,15 +49,6 @@ However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeS
 
 ## Possible further improvements in a next step after this challenge task
 - Add a feature to redeem tickets i a nice fashion (with QR code scanning or similar)
-
-## Getting Started
-
-Apply the [Quick Start](https://github.com/ethereum-boilerplate/ethereum-boilerplate?tab=readme-ov-file#-quick-start) steps (you can use `npm install` instead of yarn)
-
-Then, run the development server:
-```bash
-npm run dev
-```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
