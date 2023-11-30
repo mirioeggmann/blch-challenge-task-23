@@ -1,7 +1,7 @@
 import { useEvmNFTMetadata } from '@moralisweb3/next';
 import { NFTCardBuy } from '../../modules';
 import { EvmNft } from '@moralisweb3/common-evm-utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface TicketInfo {
     tokenId: any;
@@ -17,7 +17,7 @@ const MarketplaceElement = (props: TicketInfo) => {
     // TODO hier muss irgendwie geprüft werden, damit es im network nicht ein loop von calls gibt
     const { fetch: fetchNftMetadata } = useEvmNFTMetadata();
 
-    async function loadTicket() {
+    const loadTicket = useCallback(async () => {
         const nft = await fetchNftMetadata({
             chain: 11155111,
             address: props.nftContractAdress,
@@ -27,11 +27,11 @@ const MarketplaceElement = (props: TicketInfo) => {
         if (nft !== undefined) {
             setNft(nft);
         }
-    }
+    }, [props.nftContractAdress, props.tokenId]);
 
     useEffect(() => {
         loadTicket();
-    }, [loadTicket, props.nftContractAdress, props.tokenId]);
+    }, [loadTicket]);
 
     return (
         <>
