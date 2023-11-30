@@ -76,10 +76,6 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
                     </Box>
                 </Box>
             </SimpleGrid>
-            <HStack marginTop={2}>
-                <Button>Validate</Button>
-                <Button>Use</Button>
-            </HStack>
             <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
                 <form onSubmit={onSubmit}>
                     <HStack>

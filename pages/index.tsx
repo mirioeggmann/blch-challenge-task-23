@@ -1,11 +1,11 @@
 import {Default} from 'components/layouts/Default';
-import {Home} from 'components/templates/home';
 import type {NextPage} from 'next';
+import Marketplace from "../src/components/templates/marketplace/Marketplace";
 
 const HomePage: NextPage = () => {
     return (
-        <Default pageName="Home">
-            <Home/>
+        <Default pageName="Marketplace">
+            <Marketplace></Marketplace>
         </Default>
     );
 };
