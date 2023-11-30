@@ -9,6 +9,8 @@ We use a react (next) frontend and a two different smart contracts (one for the 
 
 ## Getting Started
 
+Either use the deployed version on https://blch-challenge-task-23.vercel.app/ or run it locally:
+
 Apply the [Quick Start](https://github.com/ethereum-boilerplate/ethereum-boilerplate?tab=readme-ov-file#-quick-start) steps (you can use `npm install` instead of yarn)
 
 Then, run the development server:
