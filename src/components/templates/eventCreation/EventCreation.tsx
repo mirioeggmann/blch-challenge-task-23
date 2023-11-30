@@ -11,7 +11,7 @@ const EventCreation = () => {
         const name = event.target[0].value;
         const abbr = event.target[1].value as string;
         const price = event.target[2].value;
-        const amount = event.target[3].value;
+        const amount = event.target[3].value; // wird in step 2 benötigt
 
         // TODO call 1: creation of contract, cleanup to insert form stuff etc.
 
@@ -26,7 +26,7 @@ const EventCreation = () => {
         const result = await deployContract(client, {
             abi: loadAbiNftContract(),
             bytecode: `0x${loadBytecodeNftContract()}`,
-            args: [address],
+            args: [address, amount, name, abbr],
             account: address,
         });
 
