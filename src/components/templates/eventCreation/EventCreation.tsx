@@ -5,8 +5,12 @@ import { sepolia } from '@wagmi/core/chains';
 import { loadAbi, loadAbiNftContract, loadBytecodeNftContract } from '../../../utils/ethereumUtils';
 import { useContractWrite } from 'wagmi';
 import { getTransactionCount } from 'viem/actions';
+import {Typography} from "@web3uikit/core";
+import {useSession} from "next-auth/react";
 
 const EventCreation = () => {
+    const session = useSession();
+
     function delay(ms: number) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
@@ -69,23 +73,27 @@ const EventCreation = () => {
             <Heading size="lg" marginBottom={6}>
                 Create Event
             </Heading>
-            <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
-                <form onSubmit={onSubmit}>
-                    <HStack>
-                        <label htmlFor={'name'}>Name</label>
-                        <Input required type={'text'} id={'name'} placeholder={'Name'} />
-                        <label htmlFor={'abbr'}>Abbreviation</label>
-                        <Input required type={'text'} id={'abbr'} placeholder={'Abbreviation'} />
-                        <label htmlFor={'price'}>Price</label>
-                        <Input required type={'number'} id={'price'} placeholder={'Price'} />
-                        <label htmlFor={'amount'}>Amount</label>
-                        <Input required type={'number'} id={'amount'} placeholder={'Amount'} />
-                    </HStack>
-                    <HStack marginTop={2}>
-                        <Button type={'submit'}>Create</Button>
-                    </HStack>
-                </form>
-            </Box>
+            {
+                session.status === "unauthenticated"
+                    ? <Typography>Log In to create Events!</Typography>
+                    : <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
+                        <form onSubmit={onSubmit}>
+                            <HStack>
+                                <label htmlFor={'name'}>Name</label>
+                                <Input required type={'text'} id={'name'} placeholder={'Name'} />
+                                <label htmlFor={'abbr'}>Abbreviation</label>
+                                <Input required type={'text'} id={'abbr'} placeholder={'Abbreviation'} />
+                                <label htmlFor={'price'}>Price</label>
+                                <Input required type={'number'} id={'price'} placeholder={'Price'} />
+                                <label htmlFor={'amount'}>Amount</label>
+                                <Input required type={'number'} id={'amount'} placeholder={'Amount'} />
+                            </HStack>
+                            <HStack marginTop={2}>
+                                <Button type={'submit'}>Create</Button>
+                            </HStack>
+                        </form>
+                    </Box>
+            }
         </>
     );
 };
