@@ -17,7 +17,7 @@ First, clone the repo and then create a `.env.local` file in the root directory 
 MORALIS_API_KEY=xxxx
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=7197b3e8dbee5ea6274cab37245eec212
-EXCHANGE_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+EXCHANGE_ADDRESS=0x3288b0e0194b2b74571a62a344c67b7d62637f7b
 ```
 
 Then install the dependencies:
