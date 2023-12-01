@@ -44,7 +44,7 @@ const ListEvent = (props: ListEventProps) => {
         console.log(contractAddress, props);
 
         createBulkListingWrite({
-            args: [contractAddress, props.price, 0, props.amount - 1],
+            args: [contractAddress, props.price, 0, props.amount! - 1],
         });
     }
 
