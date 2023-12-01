@@ -1,98 +1,46 @@
-import { Box, Button, Heading, HStack, Input } from '@chakra-ui/react';
-import { deployContract } from 'viem/contract';
-import { createWalletClient, custom, getContractAddress } from 'viem';
-import { sepolia } from '@wagmi/core/chains';
-import { loadAbi, loadAbiNftContract, loadBytecodeNftContract } from '../../../utils/ethereumUtils';
-import { useContractWrite } from 'wagmi';
-import { getTransactionCount } from 'viem/actions';
-import {Typography} from "@web3uikit/core";
-import {useSession} from "next-auth/react";
+import {Heading, Spinner} from '@chakra-ui/react';
+import {useWaitForTransaction} from 'wagmi';
+import { Typography } from "@web3uikit/core";
+import { useSession } from "next-auth/react";
+import {useEffect, useState} from "react";
+import CreateEvent from "./CreateEvent";
+import ListEvent from "./ListEvent";
 
 const EventCreation = () => {
     const session = useSession();
 
-    function delay(ms: number) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
+    let [txHash, setTxHash] = useState<string | null>(null);
+    let [name, setName] = useState<string | null>(null);
+    let [price, setPrice] = useState<number | null>(null);
+    let [amount, setAmount] = useState<number | null>(null);
 
-    const exchangeContractAddress = process.env.NEXT_PUBLIC_EXCHANGE_ADDRESS as `0x{string}`;
+    useEffect(() => {
+        console.log(txHash, price, amount)
+    }, [txHash, price, amount]);
 
-    const { write: createBulkListingWrite } = useContractWrite({
-        // @ts-ignore
-        address: exchangeContractAddress,
-        abi: loadAbi(),
-        functionName: 'createMultipleListing',
+    const { data, error, isError, isLoading } = useWaitForTransaction({
+        hash: txHash as `0x{string}`,
+        confirmations: 2,
     });
-
-    async function onSubmit(event: any) {
-        event.preventDefault();
-
-        const name = event.target[0].value;
-        const abbr = event.target[1].value as string;
-        const amount = event.target[3].value;
-        const price = event.target[2].value;
-
-        const client = createWalletClient({
-            chain: sepolia,
-            // @ts-ignore
-            transport: custom(window.ethereum),
-        });
-
-        const [address] = await client.getAddresses();
-
-        const contractCreationTransactionId = await deployContract(client, {
-            abi: loadAbiNftContract(),
-            bytecode: `0x${loadBytecodeNftContract()}`,
-            args: [amount, name, abbr, exchangeContractAddress],
-            account: address,
-        });
-
-        console.log(contractCreationTransactionId); // contract wird erfolgreich erstellt, achtung return wert ist nicht contract addresse sondern tx adresse, welche aufzeigt von wem der contract erstellt wurde
-
-        const nonce = await getTransactionCount(client, {
-            address: address,
-        });
-
-        const contractAddress = getContractAddress({
-            from: address,
-            nonce: BigInt(nonce),
-        });
-
-        console.log(contractAddress);
-
-        // TODO split in two actions with 2 buttons Create event / List event
-        await delay(12000);
-
-        createBulkListingWrite({
-            args: [contractAddress, price, 0, amount - 1],
-        });
-    }
 
     return (
         <>
             <Heading size="lg" marginBottom={6}>
-                Create Event
+                Event Creation
             </Heading>
             {
                 session.status === "unauthenticated"
                     ? <Typography>Log In to create Events!</Typography>
-                    : <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
-                        <form onSubmit={onSubmit}>
-                            <HStack>
-                                <label htmlFor={'name'}>Name</label>
-                                <Input required type={'text'} id={'name'} placeholder={'Name'} />
-                                <label htmlFor={'abbr'}>Abbreviation</label>
-                                <Input required type={'text'} id={'abbr'} placeholder={'Abbreviation'} />
-                                <label htmlFor={'price'}>Price</label>
-                                <Input required type={'number'} id={'price'} placeholder={'Price'} />
-                                <label htmlFor={'amount'}>Amount</label>
-                                <Input required type={'number'} id={'amount'} placeholder={'Amount'} />
-                            </HStack>
-                            <HStack marginTop={2}>
-                                <Button type={'submit'}>Create</Button>
-                            </HStack>
-                        </form>
-                    </Box>
+                    : data !== undefined && data !== null
+                        ? isLoading
+                            ? <><Typography>Your event is getting created...</Typography><Spinner /></>
+                            : <ListEvent amount={amount} price={price} name={name}></ListEvent>
+                        : isLoading
+                            ? <><Typography>Your event is getting created...</Typography><Spinner /></>
+                            : <CreateEvent onAmountChange={setAmount}
+                                       onPriceChange={setPrice}
+                                       onTxChange={setTxHash}
+                                       onNameChange={setName}></CreateEvent>
             }
         </>
     );
