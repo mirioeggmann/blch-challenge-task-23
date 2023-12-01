@@ -1,19 +1,24 @@
 import { Box, Button, HStack, Input, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import { EvmNft } from '@moralisweb3/common-evm-utils';
 import { Eth } from '@web3uikit/icons';
-import { FC } from 'react';
+import {FC, useEffect, useState} from 'react';
 import { useContractWrite } from 'wagmi';
 import { loadAbi } from '../../../utils/ethereumUtils';
 
 export interface NFTCardSellParams {
     key: number;
     nft: EvmNft;
+
 }
 
 const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
     const bgColor = useColorModeValue('none', 'gray.700');
     const borderColor = useColorModeValue('gray.200', 'gray.700');
     const descBgColor = useColorModeValue('gray.100', 'gray.600');
+
+    let [sellingPrice, setSellingPrice] = useState<BigInt>(BigInt(0));
+    let [nftContractAddress] = useState<string>(nft.tokenAddress['_value']);
+    let [tokenId] = useState<string | number>(nft.tokenId);
 
     const exchangeContractAddress = process.env.NEXT_PUBLIC_EXCHANGE_ADDRESS as `0x{string}`;
 
@@ -23,7 +28,7 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
         functionName: 'createListing',
     });
 
-    function createListingExec(nftContract: string, tokenId: number, price: BigInt): void {
+    function createListingExec(nftContract: string, tokenId: number | string, price: BigInt): void {
         createListingWrite({
             args: [nftContract, tokenId, price],
         });
@@ -31,12 +36,7 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
 
     async function onSubmit(event: any) {
         event.preventDefault();
-
-        const sellingPrice = event.target[0].value;
-        const nftContractAdress = event.target[1].value as string;
-        const tokenId = event.target[2].value;
-
-        createListingExec(nftContractAdress, tokenId, sellingPrice);
+        createListingExec(nftContractAddress, tokenId, sellingPrice);
     }
 
     return (
@@ -79,10 +79,8 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
             <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
                 <form onSubmit={onSubmit}>
                     <HStack>
-                        <Input required type={'number'} id={'sellingPrice'} placeholder={'Selling Price'} />
-                        <Input hidden value={nft.tokenAddress['_value']} />
-                        <Input hidden value={nft.tokenId} />
-                        <Button type={'submit'}>Resell</Button>
+                        <Input required type={'number'} id={'sellingPrice'} placeholder={'Selling Price'} value={sellingPrice.toString()} onChange={(event) => setSellingPrice(BigInt(event.target.value))} />
+                        <Button type={'submit'}>Offer</Button>
                     </HStack>
                 </form>
             </Box>
