@@ -1,8 +1,7 @@
 import { Box, Grid, Heading } from '@chakra-ui/react';
 import { useEvmWalletNFTs } from '@moralisweb3/next';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { useNetwork } from 'wagmi';
+import {useNetwork, useWaitForTransaction} from 'wagmi';
 import NFTCardSell from '../../../modules/NFTCard/NFTCardSell';
 import {Typography} from "@web3uikit/core";
 
@@ -16,13 +15,17 @@ const NFTBalances = () => {
         chain: chain?.id,
     });
 
-    useEffect(() => console.log('nfts: ', nfts), [nfts]);
+    // const { data, error, isError, isLoading } = useWaitForTransaction({
+    //     hash: txHash as `0x{string}`,
+    //     confirmations: 2,
+    // });
 
     return (
         <>
             <Heading size="lg" marginBottom={6}>
                 Tickets
             </Heading>
+            <Typography>If you want to resell your ticket, you can put tickets on to the marketplace by defining a selling price and than click on the button "offer"</Typography>
             {
                 session.status === "unauthenticated"
                     ? <Typography>Log In to see your Tickets!</Typography>
