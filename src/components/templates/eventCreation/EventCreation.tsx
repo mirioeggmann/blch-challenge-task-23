@@ -2,9 +2,9 @@ import {Heading, Spinner} from '@chakra-ui/react';
 import {useWaitForTransaction} from 'wagmi';
 import { Typography } from "@web3uikit/core";
 import { useSession } from "next-auth/react";
-import {useEffect, useState} from "react";
 import CreateEvent from "./CreateEvent";
 import ListEvent from "./ListEvent";
+import {useState} from "react";
 
 const EventCreation = () => {
     const session = useSession();
@@ -13,10 +13,6 @@ const EventCreation = () => {
     let [name, setName] = useState<string | null>(null);
     let [price, setPrice] = useState<number | null>(null);
     let [amount, setAmount] = useState<number | null>(null);
-
-    useEffect(() => {
-        console.log(txHash, price, amount)
-    }, [txHash, price, amount]);
 
     const { data, error, isError, isLoading } = useWaitForTransaction({
         hash: txHash as `0x{string}`,

@@ -33,8 +33,6 @@ const NFTCardBuy: FC<NFTCardParams> = ({ nft, buyerPrice, id }) => {
     }
 
     function buy(nft: EvmNft): void {
-        console.log(nft);
-        console.log(id);
         // TODO change this to listingId (from exchange contract not tokenId from nft contract)
         buyNFT(id as number);
     }
