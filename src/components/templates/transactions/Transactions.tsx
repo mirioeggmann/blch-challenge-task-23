@@ -16,8 +16,11 @@ import {useSession} from 'next-auth/react';
 import {useEffect} from 'react';
 import {getEllipsisTxt} from 'utils/format';
 import {useNetwork} from 'wagmi';
+import {Typography} from "@web3uikit/core";
 
 const Transactions = () => {
+    const session = useSession();
+
     const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
     const {data} = useSession();
     const {chain} = useNetwork();
@@ -33,48 +36,50 @@ const Transactions = () => {
             <Heading size="lg" marginBottom={6}>
                 Transactions
             </Heading>
-            {transactions?.length ? (
-                <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
-                    <TableContainer w={'full'}>
-                        <Table>
-                            <Thead>
-                                <Tr>
-                                    <Th>Hash</Th>
-                                    <Th>From</Th>
-                                    <Th>To</Th>
-                                    <Th>Gas used</Th>
-                                    <Th>Date</Th>
-                                    <Th isNumeric>Status</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {transactions?.map((tx, key) => (
-                                    <Tr key={key} _hover={{bgColor: hoverTrColor}} cursor="pointer">
-                                        <Td>{getEllipsisTxt(tx?.hash)}</Td>
-                                        <Td>{getEllipsisTxt(tx?.from.checksum)}</Td>
-                                        <Td>{getEllipsisTxt(tx?.to?.checksum)}</Td>
-                                        <Td>{tx.gasUsed.toString()}</Td>
-                                        <Td>{new Date(tx.blockTimestamp).toLocaleDateString()}</Td>
-                                        <Td isNumeric>{tx.receiptStatus}</Td>
-                                    </Tr>
-                                ))}
-                            </Tbody>
-                            <Tfoot>
-                                <Tr>
-                                    <Th>Hash</Th>
-                                    <Th>From</Th>
-                                    <Th>To</Th>
-                                    <Th>Gas used</Th>
-                                    <Th>Date</Th>
-                                    <Th isNumeric>Status</Th>
-                                </Tr>
-                            </Tfoot>
-                        </Table>
-                    </TableContainer>
-                </Box>
-            ) : (
-                <Box>Looks Like you do not have any transactions</Box>
-            )}
+            {
+                session.status === "unauthenticated"
+                    ? <Typography>Log In see your Transactions!</Typography>
+                    : transactions?.length
+                        ? <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
+                            <TableContainer w={'full'}>
+                                <Table>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>Hash</Th>
+                                            <Th>From</Th>
+                                            <Th>To</Th>
+                                            <Th>Gas used</Th>
+                                            <Th>Date</Th>
+                                            <Th isNumeric>Status</Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {transactions?.map((tx, key) => (
+                                            <Tr key={key} _hover={{bgColor: hoverTrColor}} cursor="pointer">
+                                                <Td>{getEllipsisTxt(tx?.hash)}</Td>
+                                                <Td>{getEllipsisTxt(tx?.from.checksum)}</Td>
+                                                <Td>{getEllipsisTxt(tx?.to?.checksum)}</Td>
+                                                <Td>{tx.gasUsed.toString()}</Td>
+                                                <Td>{new Date(tx.blockTimestamp).toLocaleDateString()}</Td>
+                                                <Td isNumeric>{tx.receiptStatus}</Td>
+                                            </Tr>
+                                        ))}
+                                    </Tbody>
+                                    <Tfoot>
+                                        <Tr>
+                                            <Th>Hash</Th>
+                                            <Th>From</Th>
+                                            <Th>To</Th>
+                                            <Th>Gas used</Th>
+                                            <Th>Date</Th>
+                                            <Th isNumeric>Status</Th>
+                                        </Tr>
+                                    </Tfoot>
+                                </Table>
+                            </TableContainer>
+                        </Box>
+                        : <Box>Looks Like you do not have any transactions</Box>
+            }
         </>
     );
 };
