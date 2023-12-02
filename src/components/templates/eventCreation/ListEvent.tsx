@@ -1,11 +1,11 @@
 import { createWalletClient, custom, getContractAddress } from 'viem';
 import { sepolia } from '@wagmi/core/chains';
 import { loadAbi } from '../../../utils/ethereumUtils';
-import {useContractWrite, useWaitForTransaction} from 'wagmi';
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { getTransactionCount } from 'viem/actions';
-import {Button, Spinner} from '@chakra-ui/react';
+import { Button, Spinner } from '@chakra-ui/react';
 import { Typography } from '@web3uikit/core';
-import {useState} from "react";
+import { useState } from 'react';
 
 interface ListEventProps {
     price: number | null;
@@ -17,7 +17,7 @@ const ListEvent = (props: ListEventProps) => {
     const exchangeContractAddress = process.env.NEXT_PUBLIC_EXCHANGE_ADDRESS as `0x{string}`;
     let [txHash, setTxHash] = useState<string | null>(null);
 
-    const { writeAsync: createBulkListingWrite,  } = useContractWrite({
+    const { writeAsync: createBulkListingWrite } = useContractWrite({
         // @ts-ignore
         address: exchangeContractAddress,
         abi: loadAbi(),
@@ -57,17 +57,24 @@ const ListEvent = (props: ListEventProps) => {
 
     return (
         <>
-            {
-                (txReceipt === null || txReceipt === undefined)
-                    ? txIsLoading
-                        ? <><Typography>Your event is getting listed on the marketplace...</Typography><Spinner /></>
-                        : <>
-                            <Typography>Your event was successfully created. Now it needs to be listed on the marketplace:</Typography>
-                            <br />
-                            <Button onClick={listEvent}>List event &quot;{props.name}&quot; on marketplace!</Button>
-                        </>
-                    : <Typography>Your event "{props.name}" was successfully listed!</Typography>
-            }
+            {txReceipt === null || txReceipt === undefined ? (
+                txIsLoading ? (
+                    <>
+                        <Typography>Your event is getting listed on the marketplace...</Typography>
+                        <Spinner />
+                    </>
+                ) : (
+                    <>
+                        <Typography>
+                            Your event was successfully created. Now it needs to be listed on the marketplace:
+                        </Typography>
+                        <br />
+                        <Button onClick={listEvent}>List event &quot;{props.name}&quot; on marketplace!</Button>
+                    </>
+                )
+            ) : (
+                <Typography>Your event &quot;{props.name}&quot; was successfully listed!</Typography>
+            )}
         </>
     );
 };
