@@ -29,7 +29,7 @@ const MarketplaceElement = (props: TicketInfo) => {
     }, [fetchNftMetadata, props.nftContractAdress, props.tokenId]);
 
     useEffect(() => {
-        loadTicket();
+        loadTicket().then();
     }, [loadTicket]);
 
     return (

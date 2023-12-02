@@ -23,13 +23,17 @@ const ConnectButton = () => {
 
             const challenge = await requestChallengeAsync({ address: account, chainId: chain.id });
 
-            if (!challenge) {
-                throw new Error('No challenge received');
+            if (challenge) {
+                const signature = await signMessageAsync({ message: challenge.message });
+                await signIn('moralis-auth', {
+                    message: challenge.message,
+                    signature,
+                    network: 'Evm',
+                    redirect: false,
+                });
+            } else {
+                console.log('No challenge received');
             }
-
-            const signature = await signMessageAsync({ message: challenge.message });
-
-            await signIn('moralis-auth', { message: challenge.message, signature, network: 'Evm', redirect: false });
         } catch (e) {
             toast({
                 title: 'Oops, something went wrong...',
