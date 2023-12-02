@@ -26,7 +26,7 @@ const MarketplaceElement = (props: TicketInfo) => {
         if (nft !== undefined) {
             setNft(nft);
         }
-    }, [props.nftContractAdress, props.tokenId]);
+    }, [fetchNftMetadata, props.nftContractAdress, props.tokenId]);
 
     useEffect(() => {
         loadTicket();
