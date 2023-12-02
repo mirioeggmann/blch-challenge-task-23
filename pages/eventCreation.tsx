@@ -1,6 +1,5 @@
 import { Default } from 'components/layouts/Default';
-import Marketplace from '../src/components/templates/marketplace/Marketplace';
-import EventCreation from "../src/components/templates/eventCreation/EventCreation";
+import EventCreation from '../src/components/templates/eventCreation/EventCreation';
 
 const EventCreationPage = () => {
     return (

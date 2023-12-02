@@ -1,21 +1,6 @@
-import {
-    TableContainer,
-    Table,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
-    Tfoot,
-    Heading,
-    Box,
-    useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
 import { useEvmWalletNFTTransfers } from '@moralisweb3/next';
-import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import { getEllipsisTxt } from 'utils/format';
-import { useNetwork } from 'wagmi';
 import { EvmChainish } from '@moralisweb3/common-evm-utils';
 
 export interface NftTransferTableParams {
