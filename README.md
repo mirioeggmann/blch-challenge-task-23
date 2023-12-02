@@ -1,14 +1,18 @@
 # [Blockchain Challenge Task HS 2023](https://dsl.i.ost.ch/lect/hs23/)
 
 ## Repo setup
+
 - https://github.com/mirioeggmann/blch-challenge-task-23 (main repo with the frontend and the documentation/presentation in `docs/`)
 - https://github.com/mirioeggmann/blch-challenge-task-23-contract (seperate for the contract, to work well with remix localhost integration/hardhat)
 
 ## Our solution
+
 A system to mint, buy and resell event tickets making use of the Ethereum blockchain.
 We use a react (next) frontend and a two different smart contracts (one for the tickets and one for the marketplace).
 
 ## Getting Started
+
+Install [MetaMask](https://metamask.io/download/) in your Browser and get yourself some Sepolia Testnet ETH on [Alchemy Sepolia Faucet](https://sepoliafaucet.com/) or [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia).
 
 Either use the deployed version on https://blch-challenge-task-23.vercel.app/ or run it locally:
 
@@ -33,6 +37,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Description of the task
+
 This semester's challenge task (CT) is the design and implementation of a blockchain-based solution to a specific problem that you have identified in your own life or community. 
 Ideally, the application is a decentralized application (DApp).
 
@@ -41,6 +46,7 @@ Find use-case or idea for your app:
 - Your app must include a public blockchain (e.g., Ethereum, Solana, ...)
 
 ### Requirements
+
 All requirements below must be met in order to pass this lecture.
 - [x] A working prototype for your use-case.
 - [x] Use latest stable releases of chosen libraries and frameworks.
@@ -52,6 +58,7 @@ All requirements below must be met in order to pass this lecture.
 The solution may use existing libraries and code, but those must open software software.
 
 ### Deliverables
+
 - First hand-in: 29.10.2023, 23:59 (CET) Your initial version of your challenge task (initial version, does not need to run). 
 - Second hand-in: 03.12.2023, 23:59 (CET)
   - well documented infrastructure (Readme.md or can be slides) and the source code (github/gitlab or similar) via invite or email to thomas.bocek-at-ost.ch 
@@ -64,7 +71,14 @@ You are allowed to use any language, framework, and platforms.
 However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeScript, Ethereum, Bitcoin, Linux.
 
 ## Possible further product improvements in a next step after this challenge task
+
 - Add a feature to redeem tickets in a nice fashion (with QR code scanning or similar)
+
+## Contributors
+
+@MaissenSamuel
+@daeglasi
+@mirioeggmann
 
 ## Credits
 
