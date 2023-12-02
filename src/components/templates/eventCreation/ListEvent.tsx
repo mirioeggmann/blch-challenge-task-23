@@ -26,7 +26,7 @@ const ListEvent = (props: ListEventProps) => {
 
     const { data: txReceipt, isLoading: txIsLoading } = useWaitForTransaction({
         hash: txHash as `0x{string}`,
-        confirmations: 1,
+        confirmations: 2,
     });
 
     async function listEvent() {
