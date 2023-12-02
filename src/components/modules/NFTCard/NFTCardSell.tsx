@@ -1,15 +1,14 @@
-import {Box, Button, HStack, Input, SimpleGrid, Spinner, useColorModeValue} from '@chakra-ui/react';
+import { Box, Button, HStack, Input, SimpleGrid, Spinner, useColorModeValue } from '@chakra-ui/react';
 import { EvmNft } from '@moralisweb3/common-evm-utils';
 import { Eth } from '@web3uikit/icons';
-import {FC, useEffect, useState} from 'react';
-import {useContractWrite, useWaitForTransaction} from 'wagmi';
+import { FC, useState } from 'react';
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { loadAbi } from '../../../utils/ethereumUtils';
-import {Typography} from "@web3uikit/core";
+import { Typography } from '@web3uikit/core';
 
 export interface NFTCardSellParams {
     key: number;
     nft: EvmNft;
-
 }
 
 const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
@@ -57,50 +56,69 @@ const NFTCard: FC<NFTCardSellParams> = ({ nft }) => {
             borderWidth="1px"
             borderColor={borderColor}
         >
-            {
-                (txReceipt === null || txReceipt === undefined)
-                    ? txIsLoading
-                        ? <><Typography>Offering ticket in process...</Typography><Spinner /></>
-                        : <>
-                            <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
-                                {nft.name}
+            {txReceipt === null || txReceipt === undefined ? (
+                txIsLoading ? (
+                    <>
+                        <Typography>Offering ticket in process...</Typography>
+                        <Spinner />
+                    </>
+                ) : (
+                    <>
+                        <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
+                            {nft.name}
+                        </Box>
+                        <HStack alignItems={'center'}>
+                            <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="smaller">
+                                {nft.contractType}
                             </Box>
-                            <HStack alignItems={'center'}>
-                                <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="smaller">
-                                    {nft.contractType}
-                                </Box>
 
-                                <Eth fontSize="20px" />
-                            </HStack>
-                            <SimpleGrid columns={2} spacing={4} bgColor={descBgColor} padding={2.5} borderRadius="xl" marginTop={2}>
-                                <Box>
-                                    <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
-                                        Token ID
-                                    </Box>
-                                    <Box as="h4" noOfLines={1} fontSize="sm">
-                                        {nft.tokenId}
-                                    </Box>
+                            <Eth fontSize="20px" />
+                        </HStack>
+                        <SimpleGrid
+                            columns={2}
+                            spacing={4}
+                            bgColor={descBgColor}
+                            padding={2.5}
+                            borderRadius="xl"
+                            marginTop={2}
+                        >
+                            <Box>
+                                <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
+                                    Token ID
                                 </Box>
-                                <Box>
-                                    <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
-                                        Amount
-                                    </Box>
-                                    <Box as="h4" noOfLines={1} fontSize="sm">
-                                        {nft.amount}
-                                    </Box>
+                                <Box as="h4" noOfLines={1} fontSize="sm">
+                                    {nft.tokenId}
                                 </Box>
-                            </SimpleGrid>
-                            <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
-                                <form onSubmit={onSubmit}>
-                                    <HStack>
-                                        <Input required type={'number'} id={'sellingPrice'} placeholder={'Selling Price'} value={sellingPrice.toString()} onChange={(event) => setSellingPrice(BigInt(event.target.value))} />
-                                        <Button type={'submit'}>Offer</Button>
-                                    </HStack>
-                                </form>
                             </Box>
-                        </>
-                    : <Typography>You offered this ticket for resell!</Typography>
-            }
+                            <Box>
+                                <Box as="h4" noOfLines={1} fontWeight="medium" fontSize="sm">
+                                    Amount
+                                </Box>
+                                <Box as="h4" noOfLines={1} fontSize="sm">
+                                    {nft.amount}
+                                </Box>
+                            </Box>
+                        </SimpleGrid>
+                        <Box mt="1" fontWeight="semibold" as="h4" noOfLines={1} marginTop={2}>
+                            <form onSubmit={onSubmit}>
+                                <HStack>
+                                    <Input
+                                        required
+                                        type={'number'}
+                                        id={'sellingPrice'}
+                                        placeholder={'Selling Price'}
+                                        value={sellingPrice.toString()}
+                                        onChange={(event) => setSellingPrice(BigInt(event.target.value))}
+                                    />
+                                    <Button type={'submit'}>Offer</Button>
+                                </HStack>
+                            </form>
+                        </Box>
+                    </>
+                )
+            ) : (
+                <Typography>You offered this ticket for resell!</Typography>
+            )}
         </Box>
     );
 };
