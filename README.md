@@ -82,4 +82,4 @@ However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeS
 
 ## Credits
 
-Credits to this boilerplate: https://github.com/ethereum-boilerplate/ethereum-boilerplate/tree/main
+- [Ethereum Boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate/tree/main)
