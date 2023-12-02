@@ -16,7 +16,7 @@ const EventCreation = () => {
 
     const { data, error, isError, isLoading } = useWaitForTransaction({
         hash: txHash as `0x{string}`,
-        confirmations: 2,
+        confirmations: 1,
     });
 
     return (
