@@ -25,18 +25,20 @@ const NFTBalances = () => {
             <Heading size="lg" marginBottom={6}>
                 Tickets
             </Heading>
-            <Typography>
-                If you want to resell your ticket, you can put tickets on to the marketplace by defining a selling price
-                and than click on the button &quot;offer&quot;
-            </Typography>
             {session.status === 'unauthenticated' ? (
                 <Typography>Log In to see your Tickets!</Typography>
             ) : nfts?.length ? (
-                <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
-                    {nfts.map((nft, key) => (
-                        <NFTCardSell nft={nft} key={key} />
-                    ))}
-                </Grid>
+                <>
+                    <Typography>
+                        If you want to resell your ticket, you can put tickets on to the marketplace by defining a selling price
+                        and than click on the button &quot;offer&quot;
+                    </Typography>
+                    <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
+                        {nfts.map((nft, key) => (
+                            <NFTCardSell nft={nft} key={key} />
+                        ))}
+                    </Grid>
+                </>
             ) : (
                 <Box>Looks Like you do not have any NFTs</Box>
             )}
