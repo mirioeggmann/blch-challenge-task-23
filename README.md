@@ -76,9 +76,9 @@ However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeS
 
 ## Contributors
 
-@MaissenSamuel
-@daeglasi
-@mirioeggmann
+- [@MaissenSamuel](https://github.com/MaissenSamuel)
+- [@daeglasi](https://github.com/daeglasi)
+- [@mirioeggmann](https://github.com/mirioeggmann)
 
 ## Credits
 
