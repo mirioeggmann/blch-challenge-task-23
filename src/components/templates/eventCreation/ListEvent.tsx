@@ -55,7 +55,7 @@ const ListEvent = (props: ListEventProps) => {
         <>
             <Typography>Your event was successfully created. Now it needs to be listed on the marketplace:</Typography>
             <br />
-            <Button onClick={listEvent}>List event "{props.name}" on marketplace!</Button>
+            <Button onClick={listEvent}>List event &quot;{props.name}&quot; on marketplace!</Button>
         </>
     );
 };
