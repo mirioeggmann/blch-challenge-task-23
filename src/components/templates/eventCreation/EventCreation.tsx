@@ -14,7 +14,7 @@ const EventCreation = () => {
     let [price, setPrice] = useState<number | null>(null);
     let [amount, setAmount] = useState<number | null>(null);
 
-    const { data, isLoading } = useWaitForTransaction({
+    const { data: txReceipt, isLoading: txIsLoading } = useWaitForTransaction({
         hash: txHash as `0x{string}`,
         confirmations: 2,
     });
@@ -24,30 +24,35 @@ const EventCreation = () => {
             <Heading size="lg" marginBottom={6}>
                 Event Creation
             </Heading>
-            {session.status === 'unauthenticated' ? (
-                <Typography>Log In to create Events!</Typography>
-            ) : data !== undefined && data !== null ? (
-                isLoading ? (
-                    <>
+            {
+                session.status === 'unauthenticated'
+                    ? ( <Typography>Log In to create Events!</Typography> )
+                    : txReceipt !== undefined && txReceipt !== null
+                        ? (txIsLoading
+                            ? (
+                                <>
+                                    <Typography>Your event is getting created...</Typography>
+                                    <Spinner />
+                                </>
+                            )
+                            : (
+                                <ListEvent amount={amount} price={price} name={name}></ListEvent>
+                            )
+                        )
+                        : txIsLoading
+                            ? ( <>
                         <Typography>Your event is getting created...</Typography>
                         <Spinner />
-                    </>
-                ) : (
-                    <ListEvent amount={amount} price={price} name={name}></ListEvent>
-                )
-            ) : isLoading ? (
-                <>
-                    <Typography>Your event is getting created...</Typography>
-                    <Spinner />
-                </>
-            ) : (
-                <CreateEvent
-                    onAmountChange={setAmount}
-                    onPriceChange={setPrice}
-                    onTxChange={setTxHash}
-                    onNameChange={setName}
-                ></CreateEvent>
-            )}
+                    </> )
+                            : (
+                                <CreateEvent
+                                    onAmountChange={setAmount}
+                                    onPriceChange={setPrice}
+                                    onTxChange={setTxHash}
+                                    onNameChange={setName}
+                                ></CreateEvent>
+                            )
+            }
         </>
     );
 };

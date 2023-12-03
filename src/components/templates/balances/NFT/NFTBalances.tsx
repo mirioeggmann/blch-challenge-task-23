@@ -30,8 +30,8 @@ const NFTBalances = () => {
             ) : nfts?.length ? (
                 <>
                     <Typography>
-                        If you want to resell your ticket, you can put tickets on to the marketplace by defining a selling price
-                        and than click on the button &quot;offer&quot;
+                        If you want to resell your ticket, you can put tickets on to the marketplace by approving them
+                        first and then defining a selling price and than click on the button &quot;offer&quot;
                     </Typography>
                     <Grid templateColumns="repeat(auto-fit, minmax(280px, 1fr))" gap={6}>
                         {nfts.map((nft, key) => (
