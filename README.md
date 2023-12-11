@@ -83,3 +83,7 @@ However, the supervisors are familiar with those: Golang, Java, JavaScript/TypeS
 ## Credits
 
 - [Ethereum Boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate/tree/main)
+
+## Related work
+- [eventsea](https://github.com/Consensys/eventsea)
+- [ticketing solution of unlock-protocol](https://app.unlock-protocol.com/event)
